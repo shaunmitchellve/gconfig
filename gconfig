@@ -1,0 +1,23 @@
+#!/bin/sh
+clear
+
+gcloud config configurations list --format="[box]"
+echo "Activate which config (leave blank to keep current)?"
+read configName
+
+if [[ $configName != "" ]]
+then
+ gcloud config configurations activate $configName
+fi
+
+#gcloud config list --format="json" | jq -j '.core.account'
+
+gcloud projects list --format="[box]"
+
+echo "Change project (leave blank if no)?"
+read projectName
+
+if [[ $projectName != "" ]]
+then
+ gcloud config set core/project $projectName
+fi
